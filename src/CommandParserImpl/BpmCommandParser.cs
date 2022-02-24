@@ -8,7 +8,7 @@ using System.Text;
 using OngekiFumenEditor.Parser;
 using System.Threading.Tasks;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
     [Export(typeof(ICommandParser))]
     public class BpmCommandParser : CommandParserBase

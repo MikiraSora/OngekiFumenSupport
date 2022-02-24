@@ -14,10 +14,12 @@
     <PackageReference Include="Caliburn.Micro" Version="4.0.173">
       <ExcludeAssets>runtime;</ExcludeAssets>
     </PackageReference>
-    <ProjectReference Include="..\..\OngekiFumenEditor\OngekiFumenEditor.csproj">
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\refHost\OngekiFumenEditor\OngekiFumenEditor\OngekiFumenEditor.csproj">
       <Private>false</Private>
       <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>
   </ItemGroup>
-
 </Project>

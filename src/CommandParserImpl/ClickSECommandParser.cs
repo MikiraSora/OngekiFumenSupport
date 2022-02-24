@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
     [Export(typeof(ICommandParser))]
     public class ClickSECommandParser : CommandParserBase

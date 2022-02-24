@@ -1,0 +1,3 @@
+[submodule "refHost/OngekiFumenEditor"]
+	path = refHost/OngekiFumenEditor
+	url = https://github.com/MikiraSora/OngekiFumenEditor

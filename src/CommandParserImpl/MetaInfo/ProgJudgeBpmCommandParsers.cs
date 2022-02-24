@@ -7,7 +7,7 @@ using OngekiFumenEditor.Parser;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl.MetaInfo
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.MetaInfo
 {
     [Export(typeof(ICommandParser))]
     class ProgJudgeBpmCommandParsers : MetaInfoCommandParserBase

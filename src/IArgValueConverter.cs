@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport
 {
     public interface IArgValueConverter
     {

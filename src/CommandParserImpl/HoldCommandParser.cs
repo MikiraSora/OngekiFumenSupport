@@ -9,7 +9,7 @@ using OngekiFumenEditor.Parser;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
     [Export(typeof(ICommandParser))]
     public class HoldCommandParser : CommandParserBase

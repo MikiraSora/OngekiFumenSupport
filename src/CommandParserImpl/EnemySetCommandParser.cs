@@ -9,7 +9,7 @@ using OngekiFumenEditor.Parser;
 using System.Threading.Tasks;
 using static OngekiFumenEditor.Base.OngekiObjects.EnemySet;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
     [Export(typeof(ICommandParser))]
     public class EnemySetCommandParser : CommandParserBase

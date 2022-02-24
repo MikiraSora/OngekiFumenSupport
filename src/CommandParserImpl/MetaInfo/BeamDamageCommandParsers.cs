@@ -1,7 +1,7 @@
 ﻿using OngekiFumenEditor.Base;
 using System.ComponentModel.Composition;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl.MetaInfo
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.MetaInfo
 {
     [Export(typeof(ICommandParser))]
     class BeamDamageCommandParsers : MetaInfoCommandParserBase

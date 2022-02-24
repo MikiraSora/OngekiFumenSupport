@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport
 {
     [Export(typeof(IFumenSerializable))]
     public class DefaultOngekiFumenFormatter : IFumenSerializable

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OngekiFumenEditor.Parser;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
     [Export(typeof(ICommandParser))]
     public class FlickCommandParser : CommandParserBase

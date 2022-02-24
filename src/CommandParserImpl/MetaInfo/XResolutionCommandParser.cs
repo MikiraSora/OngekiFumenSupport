@@ -7,7 +7,7 @@ using System.Text;
 using OngekiFumenEditor.Parser;
 using System.Threading.Tasks;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser.CommandParserImpl.MetaInfo
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.MetaInfo
 {
     [Export(typeof(ICommandParser))]
     class XResolutionCommandParser : MetaInfoCommandParserBase

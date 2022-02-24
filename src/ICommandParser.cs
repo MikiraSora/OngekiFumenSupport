@@ -1,6 +1,6 @@
 ﻿using OngekiFumenEditor.Base;
 
-namespace OngekiFumenEditorPlugins.OngekiFumenParser
+namespace OngekiFumenEditorPlugins.OngekiFumenSupport
 {
     public interface ICommandParser
     {
