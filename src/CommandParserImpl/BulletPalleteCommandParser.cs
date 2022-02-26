@@ -38,12 +38,16 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
                 _ => throw new NotImplementedException(),
             };
             bpl.Speed = dataIntArr.ElementAtOrDefault(5);
-            bpl.BulletTypeValue = dataStrArr.ElementAtOrDefault(6)?.ToUpper() switch
+            bpl.SizeValue = dataStrArr.ElementAtOrDefault(6)?.ToUpper() switch
             {
-                "NML" => BulletType.Normal,
-                "STR" => BulletType.Hard,
-                "DNG" => BulletType.Danger,
-                _ => throw new NotImplementedException(),
+                "L" => BulletSize.Lerge,
+                "N" or _ => BulletSize.Normal,
+            };
+            bpl.TypeValue = dataStrArr.ElementAtOrDefault(7)?.ToUpper() switch
+            {
+                "SQR" => BulletType.Square,
+                "NDL" => BulletType.Needle,
+                "CIR" or _=> BulletType.Circle,
             };
 
             return bpl;

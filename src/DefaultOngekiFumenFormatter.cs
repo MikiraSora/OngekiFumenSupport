@@ -78,7 +78,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             sb.AppendLine("[B_PALETTE]");
 
             foreach (var bpl in fumen.BulletPalleteList.OrderBy(x => x.StrID))
-                sb.AppendLine($"{bpl.IDShortName}\t{bpl.StrID}\t{bpl.ShooterValue}\t{bpl.PlaceOffset}\t{bpl.TargetValue}\t{bpl.Speed}\t{bpl.BulletTypeValue}");
+                sb.AppendLine($"{bpl.IDShortName}\t{bpl.StrID}\t{bpl.ShooterValue}\t{bpl.PlaceOffset}\t{bpl.TargetValue}\t{bpl.Speed}\t{bpl.SizeValue}\t{bpl.TypeValue}");
         }
 
 
@@ -128,7 +128,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
         {
             sb.AppendLine("[BULLET]");
             foreach (var u in fumen.Bullets.OrderBy(x => x.TGrid))
-                sb.AppendLine($"{u.IDShortName}\t{u.ReferenceBulletPallete?.StrID}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}");
+                sb.AppendLine($"{u.IDShortName}\t{u.ReferenceBulletPallete?.StrID}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}\t{u.BulletTypeValue}");
         }
 
         public void ProcessBEAM(OngekiFumen fumen, StringBuilder sb)
@@ -149,7 +149,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             sb.AppendLine("[BELL]");
 
             foreach (var u in fumen.Bells.OrderBy(x => x.TGrid))
-                sb.AppendLine($"{u.IDShortName}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}");
+                sb.AppendLine($"{u.IDShortName}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}\t{u.ReferenceBulletPallete?.StrID ?? "--"}");
         }
 
         public void ProcessFLICK(OngekiFumen fumen, StringBuilder sb)

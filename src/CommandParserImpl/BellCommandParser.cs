@@ -24,6 +24,10 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
             bell.TGrid.Grid = (int)dataArr[2];
             bell.XGrid.Unit = dataArr[3];
 
+            var palleteId = args.GetData<string>(4);
+            if (!string.IsNullOrWhiteSpace(palleteId) && palleteId != "--")
+                bell.ReferenceBulletPallete = fumen.BulletPalleteList.FirstOrDefault(x => x.StrID == palleteId);
+
             return bell;
         }
     }
