@@ -11,18 +11,26 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OngekiFumenEditor.Base.OngekiObjects;
 
 namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
     public abstract class LaneCommandParserBase : CommandParserBase
     {
-        public void CommonParse(ConnectableObjectBase beam, CommandArgs args, OngekiFumen fumen)
+        public void CommonParse(ConnectableObjectBase connectObject, CommandArgs args, OngekiFumen fumen)
         {
             var dataArr = args.GetDataArray<float>();
 
             //todo add BeamTrack
-            beam.TGrid = new TGrid(dataArr[2], (int)dataArr[3]);
-            beam.XGrid = new XGrid(dataArr[4]);
+            connectObject.TGrid = new TGrid(dataArr[2], (int)dataArr[3]);
+            connectObject.XGrid = new XGrid(dataArr[4]);
+
+            if (connectObject is IColorfulLane colorfulLane)
+            {
+                var colorId = (int)dataArr[5];
+                colorfulLane.ColorId = ColorIdConst.AllColors.FirstOrDefault(x => x.Id == colorId, ColorIdConst.Akari);
+                colorfulLane.Brightness = (int)dataArr[6];
+            }
         }
     }
 

@@ -2,6 +2,7 @@
 using OngekiFumenEditor.Base.OngekiObjects;
 using OngekiFumenEditor.Base.OngekiObjects.Beam;
 using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
+using OngekiFumenEditor.Base.OngekiObjects.Lane;
 using OngekiFumenEditor.Parser;
 using System;
 using System.Collections.Generic;
@@ -106,7 +107,8 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
         {
             void Serialize(ConnectableStartObject laneStart)
             {
-                void SerializeOutput(ConnectableObjectBase o) => sb.AppendLine($"{o.IDShortName}\t{o.RecordId}\t{o.TGrid.Serialize()}\t{o.XGrid.Serialize()}");
+                void SerializeOutput(ConnectableObjectBase o)
+                    => sb.AppendLine($"{o.IDShortName}\t{o.RecordId}\t{o.TGrid.Serialize()}\t{o.XGrid.Serialize()}\t{(o is IColorfulLane colorfulLane ? $"{colorfulLane.ColorId.Id}\t{colorfulLane.Brightness}" : string.Empty)}");
 
                 SerializeOutput(laneStart);
                 foreach (var child in laneStart.Children)
