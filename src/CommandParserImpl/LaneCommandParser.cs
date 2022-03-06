@@ -70,6 +70,24 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
     #region Implements
 
     [Export(typeof(ICommandParser))]
+    public class ColorfulLaneStartCommandParser : LaneStartCommandParser<ColorfulLaneStart>
+    {
+        public override string CommandLineHeader => "CLS";
+    }
+
+    [Export(typeof(ICommandParser))]
+    public class ColorfulLaneNextCommandParser : LaneChildObjectCommandParser<ColorfulLaneNext>
+    {
+        public override string CommandLineHeader => "CLN";
+    }
+
+    [Export(typeof(ICommandParser))]
+    public class ColorfulLaneEndCommandParser : LaneChildObjectCommandParser<ColorfulLaneEnd>
+    {
+        public override string CommandLineHeader => "CLE";
+    }
+
+    [Export(typeof(ICommandParser))]
     public class LaneLeftStartCommandParser : LaneStartCommandParser<LaneLeftStart>
     {
         public override string CommandLineHeader => "LLS";
