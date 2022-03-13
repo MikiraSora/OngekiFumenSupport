@@ -1,3 +1,1 @@
-# OngekiFumenSupport
-
-自行编译
+请自行编译
