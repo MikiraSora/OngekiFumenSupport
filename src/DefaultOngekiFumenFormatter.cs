@@ -59,7 +59,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
 
             sb.AppendLine("[HEADER]");
             //sb.AppendLine($"VERSION\t{metaInfo.Version.Major}\t{metaInfo.Version.Minor}\t{metaInfo.Version.Build}");
-            sb.AppendLine($"VERSION\t{1}\t{2}\t{0}");
+            sb.AppendLine($"VERSION\t{1}\t{6}\t{0}");
             sb.AppendLine($"CREATOR\t{metaInfo.Creator}");
             sb.AppendLine($"BPM_DEF\t{metaInfo.BpmDefinition.First}\t{metaInfo.BpmDefinition.Common}\t{metaInfo.BpmDefinition.Maximum}\t{metaInfo.BpmDefinition.Minimum}");
             sb.AppendLine($"MET_DEF\t{metaInfo.MeterDefinition.Bunshi}\t{metaInfo.MeterDefinition.Bunbo}");
@@ -72,6 +72,15 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             sb.AppendLine($"HARDBULLET_DAMAGE\t{metaInfo.HardBulletDamage:F3}");
             sb.AppendLine($"DANGERBULLET_DAMAGE\t{metaInfo.DangerBulletDamage:F3}");
             sb.AppendLine($"BEAM_DAMAGE\t{metaInfo.BeamDamage:F3}");
+
+            var statistics = FumenStatisticsCalculator.CalculateObjectStatisticsAsync(fumen);
+            sb.AppendLine($"T_TOTAL\t{statistics.TotalObjects}");
+            sb.AppendLine($"T_TAP\t{statistics.TapObjects}");
+            sb.AppendLine($"T_HOLD\t{statistics.HoldObjects}");
+            sb.AppendLine($"T_SIDE\t{statistics.SideObjects}");
+            sb.AppendLine($"T_SHOLD\t{statistics.SideHoldObjects}");
+            sb.AppendLine($"T_FLICK\t{statistics.FlickObjects}");
+            sb.AppendLine($"T_BELL\t{statistics.BellObjects}");
         }
 
         public void ProcessB_PALETTE(OngekiFumen fumen, StringBuilder sb)
