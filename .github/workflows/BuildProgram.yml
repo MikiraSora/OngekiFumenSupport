@@ -43,5 +43,5 @@ jobs:
       run: Get-ChildItem -Recurse
     - uses: actions/upload-artifact@v3
       with:
-        name: OngekiFumenEditor_${{env.Branch}}_${{env.Configuration}}_${{env.Version}}
-        path: D:\a\OngekiFumenEditor\OngekiFumenEditor\bin\githubActions
+        name: OngekiFumenEditorPlugins.OngekiFumenSupport_${{env.Branch}}_${{env.Configuration}}
+        path: D:\a\OngekiFumenSupport\OngekiFumenSupport\bin\githubActions
