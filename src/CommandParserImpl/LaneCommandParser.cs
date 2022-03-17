@@ -100,6 +100,12 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
     }
 
     [Export(typeof(ICommandParser))]
+    public class EnemyLaneStartCommandParser : LaneStartCommandParser<EnemyLaneStart>
+    {
+        public override string CommandLineHeader => "ENS";
+    }
+
+    [Export(typeof(ICommandParser))]
     public class LaneRightStartCommandParser : LaneStartCommandParser<LaneRightStart>
     {
         public override string CommandLineHeader => "LRS";
@@ -115,6 +121,12 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
     public class LaneCenterNextCommandParser : LaneChildObjectCommandParser<LaneCenterNext>
     {
         public override string CommandLineHeader => "LCN";
+    }
+
+    [Export(typeof(ICommandParser))]
+    public class EnemyLaneNextCommandParser : LaneChildObjectCommandParser<EnemyLaneNext>
+    {
+        public override string CommandLineHeader => "ENN";
     }
 
     [Export(typeof(ICommandParser))]
@@ -140,6 +152,13 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
     {
         public override string CommandLineHeader => "LRE";
     }
+
+    [Export(typeof(ICommandParser))]
+    public class EnemyLaneEndCommandParser : LaneChildObjectCommandParser<EnemyLaneEnd>
+    {
+        public override string CommandLineHeader => "ENE";
+    }
+
 
     #endregion
 }

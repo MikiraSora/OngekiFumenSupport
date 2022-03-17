@@ -35,6 +35,9 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             ProcessLANE(fumen, sb);
             sb.AppendLine();
 
+            ProcessLANE_BLOCK(fumen, sb);
+            sb.AppendLine();
+
             ProcessBULLET(fumen, sb);
             sb.AppendLine();
 
@@ -51,6 +54,16 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             sb.AppendLine();
 
             return Task.FromResult(Encoding.UTF8.GetBytes(sb.ToString()));
+        }
+
+        private void ProcessLANE_BLOCK(OngekiFumen fumen, StringBuilder sb)
+        {
+            sb.AppendLine("[LANE_BLOCK]");
+            foreach (var lbk in fumen.LaneBlocks)
+            {
+                (var startWallLane, var endWallLane) = lbk.CalculateReferenceWallLanes(fumen);
+                sb.AppendLine($"LBK\t{startWallLane?.RecordId ?? -1}\t");
+            }
         }
 
         public void ProcessHEADER(OngekiFumen fumen, StringBuilder sb)
