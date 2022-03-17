@@ -62,7 +62,10 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             foreach (var lbk in fumen.LaneBlocks)
             {
                 (var startWallLane, var endWallLane) = lbk.CalculateReferenceWallLanes(fumen);
-                sb.AppendLine($"LBK\t{startWallLane?.RecordId ?? -1}\t");
+                var startXGrid = startWallLane.CalulateXGrid(lbk.TGrid);
+                var endXGrid = endWallLane.CalulateXGrid(lbk.EndIndicator.TGrid);
+                //todo XGRID计算更准确一点点
+                sb.AppendLine($"LBK\t{startWallLane?.RecordId ?? -1}\t{lbk.TGrid.Unit}\t{lbk.TGrid.Grid}\t{startXGrid.Unit}\t{startXGrid.Grid}\t{lbk.EndIndicator.TGrid.Unit}\t{lbk.EndIndicator.TGrid.Grid}\t{endXGrid.Unit}\t{endXGrid.Grid}");
             }
         }
 

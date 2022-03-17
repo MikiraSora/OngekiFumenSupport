@@ -7,6 +7,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static OngekiFumenEditor.Base.OngekiObjects.LaneBlockArea;
 
 namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
@@ -18,15 +19,19 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
         public override OngekiObjectBase Parse(CommandArgs args, OngekiFumen fumen)
         {
             var dataArr = args.GetDataArray<float>();
-            var hold = new LaneBlockArea();
+            var lbk = new LaneBlockArea();
+            var laneRecId = (int)dataArr[1];
 
-            hold.TGrid.Unit = dataArr[2];
-            hold.TGrid.Grid = (int)dataArr[3];
+            var refLaneType = fumen.Lanes.FirstOrDefault(x => x.RecordId == laneRecId)?.LaneType;
+            lbk.Direction = refLaneType == LaneType.WallLeft ? BlockDirection.Left : BlockDirection.Right;
 
-            hold.EndIndicator.TGrid.Unit = dataArr[6];
-            hold.EndIndicator.TGrid.Grid = (int)dataArr[7];
+            lbk.TGrid.Unit = dataArr[2];
+            lbk.TGrid.Grid = (int)dataArr[3];
 
-            return hold;
+            lbk.EndIndicator.TGrid.Unit = dataArr[6];
+            lbk.EndIndicator.TGrid.Grid = (int)dataArr[7];
+
+            return lbk;
         }
     }
 }
