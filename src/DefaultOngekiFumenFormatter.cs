@@ -155,7 +155,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
         {
             sb.AppendLine("[BULLET]");
             foreach (var u in fumen.Bullets.OrderBy(x => x.TGrid))
-                sb.AppendLine($"{u.IDShortName}\t{u.ReferenceBulletPallete?.StrID}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}\t{u.BulletTypeValue}");
+                sb.AppendLine($"{u.IDShortName}\t{u.ReferenceBulletPallete?.StrID}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}\t{u.BulletDamageTypeValue}");
         }
 
         public void ProcessBEAM(OngekiFumen fumen, StringBuilder sb)
