@@ -7,6 +7,7 @@ using System.Linq;
 using OngekiFumenEditor.Parser;
 using System.Text;
 using System.Threading.Tasks;
+using static OngekiFumenEditor.Base.OngekiObjects.Bullet;
 
 namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
@@ -25,6 +26,13 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
             bullet.TGrid.Unit = dataArr[2];
             bullet.TGrid.Grid = (int)dataArr[3];
             bullet.XGrid.Unit = dataArr[4];
+            bullet.BulletDamageTypeValue = args.GetData<string>(5)?.ToUpper() switch
+            {
+                "NML" => BulletDamageType.Normal,
+                "STR" => BulletDamageType.Hard,
+                "DNG" => BulletDamageType.Danger,
+                _ => throw new NotImplementedException(),
+            };
 
             return bullet;
         }
