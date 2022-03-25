@@ -8,7 +8,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
 {
     public class CommandArgs
     {
-        private static readonly char[] SplitEmptyCharArray = new[] { ' ', '\t' };
+        private static readonly char[] SplitEmptyCharArray = new[] {/* ' ',*/ '\t' };
 
         private string line = string.Empty;
         private Dictionary<Type, Array> cacheDataArray = new Dictionary<Type, Array>();

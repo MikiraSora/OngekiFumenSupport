@@ -62,8 +62,8 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             foreach (var lbk in fumen.LaneBlocks)
             {
                 (var startWallLane, var endWallLane) = lbk.CalculateReferenceWallLanes(fumen);
-                var startXGrid = startWallLane.CalulateXGrid(lbk.TGrid);
-                var endXGrid = endWallLane.CalulateXGrid(lbk.EndIndicator.TGrid);
+                var startXGrid = startWallLane?.CalulateXGrid(lbk.TGrid) ?? new XGrid();
+                var endXGrid = endWallLane?.CalulateXGrid(lbk.EndIndicator.TGrid) ?? new XGrid();
                 //todo XGRID计算更准确一点点
                 sb.AppendLine($"LBK\t{startWallLane?.RecordId ?? -1}\t{lbk.TGrid.Unit}\t{lbk.TGrid.Grid}\t{startXGrid.Unit}\t{startXGrid.Grid}\t{lbk.EndIndicator.TGrid.Unit}\t{lbk.EndIndicator.TGrid.Grid}\t{endXGrid.Unit}\t{endXGrid.Grid}");
             }
@@ -118,6 +118,10 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
 
             foreach (var o in fumen.MeterChanges.OrderBy(x => x.TGrid).Where(x => x.TGrid != fumen.MeterChanges.FirstMeter.TGrid))
                 sb.AppendLine($"{o.IDShortName}\t{o.TGrid.Serialize()}\t{o.BunShi}\t{o.Bunbo}");
+            sb.AppendLine();
+
+            foreach (var o in fumen.Soflans.OrderBy(x => x.TGrid))
+                sb.AppendLine($"{o.IDShortName}\t{o.TGrid.Serialize()}\t{o.GridLength}\t{o.Speed}");
             sb.AppendLine();
 
             foreach (var o in fumen.ClickSEs.OrderBy(x => x.TGrid))
