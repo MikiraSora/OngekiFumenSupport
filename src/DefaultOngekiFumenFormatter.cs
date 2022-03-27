@@ -4,6 +4,7 @@ using OngekiFumenEditor.Base.OngekiObjects.Beam;
 using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
 using OngekiFumenEditor.Base.OngekiObjects.Lane;
 using OngekiFumenEditor.Parser;
+using OngekiFumenEditor.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -53,7 +54,37 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             ProcessNOTES(fumen, sb);
             sb.AppendLine();
 
+            ProcessCURVE(fumen, sb);
+            sb.AppendLine();
+
             return Task.FromResult(Encoding.UTF8.GetBytes(sb.ToString()));
+        }
+
+        private void ProcessCURVE(OngekiFumen fumen, StringBuilder sb)
+        {
+            void Process(IEnumerable<ConnectableStartObject> starts)
+            {
+                foreach (var lane in starts)
+                {
+                    var id = lane.RecordId;
+
+                    foreach ((var child, var i) in lane.Children.Select((x, i) => (x, i)))
+                    {
+                        if (child.PathControls.Count > 0)
+                        {
+                            sb.AppendLine($"LCO_PREC\t{id}\t{i}\t{child.CurvePrecision}");
+                            foreach (var control in child.PathControls)
+                            {
+                                sb.AppendLine($"LCO_CTRL\t{id}\t{i}\t{control.TGrid.Unit}\t{control.TGrid.Grid}\t{control.XGrid.Unit}\t{control.XGrid.Grid}");
+                            }
+                            sb.AppendLine();
+                        }
+                    }
+                }
+            }
+
+            sb.AppendLine("#[CURVE]");
+            Process(fumen.Lanes);
         }
 
         private void ProcessLANE_BLOCK(OngekiFumen fumen, StringBuilder sb)
