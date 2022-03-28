@@ -17,9 +17,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\refHost\OngekiFumenEditor\gemini\src\Gemini\Gemini.csproj">
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
     <ProjectReference Include="..\refHost\OngekiFumenEditor\OngekiFumenEditor\OngekiFumenEditor.csproj">
       <Private>false</Private>
       <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Kernel\" />
   </ItemGroup>
 </Project>
