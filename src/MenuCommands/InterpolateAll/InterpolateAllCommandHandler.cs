@@ -49,7 +49,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             var affactObjects = fumen.Taps
                 .AsEnumerable<ILaneDockable>()
                 .Concat(fumen.Holds.SelectMany(x => new ILaneDockable[] { x, x.HoldEnd }))
-                .Where(x => x.ReferenceLaneStart?.RecordId is int id && curveStarts.Any(y => y.RecordId == x.ReferenceLaneStart.RecordId));
+                .Where(x => x.ReferenceLaneStart?.RecordId is int id && curveStarts.Any(y => y.RecordId == id)).ToList();
 
             var laneMap = curveStarts.ToDictionary(
                 x => x.RecordId,
@@ -114,6 +114,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             };
 
             editor.UndoRedoManager.ExecuteAction(LambdaUndoAction.Create("插值所有曲线轨道", redoAction, undoAction));
+            Log.LogInfo($"插值计算完成,一共对 {curveStarts.Count} 条符合条件的轨道进行插值,生成了 {laneMap.Values.Select(x => x.Length).Sum()} 条新的轨道,对应 {affactObjects.Count()} 个受到影响的Tap/Hold等物件进行重新计算。");
         }
     }
 }
