@@ -91,17 +91,20 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             }
 
             var holdStartTGrid = x.TGrid;
-            var holdEndTGrid = x.HoldEnd.TGrid;
+            var holdEndTGrid = x.HoldEnd?.TGrid;
 
             var count = 0;
             var tickGrid = CalcHoldTickStepSize(holdStartTGrid);
             var curTGrid = holdStartTGrid + new GridOffset(0, tickGrid);
 
-            while (curTGrid < holdEndTGrid)
+            if (holdEndTGrid is not null)
             {
-                count++;
-                tickGrid = CalcHoldTickStepSize(curTGrid);
-                curTGrid = curTGrid + new GridOffset(0, tickGrid);
+                while (curTGrid < holdEndTGrid)
+                {
+                    count++;
+                    tickGrid = CalcHoldTickStepSize(curTGrid);
+                    curTGrid = curTGrid + new GridOffset(0, tickGrid);
+                }
             }
 
             return count + 1;
