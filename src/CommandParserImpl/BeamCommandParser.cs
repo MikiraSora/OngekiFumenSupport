@@ -1,5 +1,6 @@
 ﻿using OngekiFumenEditor.Base;
 using OngekiFumenEditor.Base.OngekiObjects.Beam;
+using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
 using OngekiFumenEditor.Utils;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -8,13 +9,13 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 {
     public abstract class BeamCommandParserBase : CommandParserBase
     {
-        public void CommonParse(BeamBase beam, CommandArgs args)
+        public void CommonParse(ConnectableObjectBase beam, CommandArgs args)
         {
             var dataArr = args.GetDataArray<float>();
 
             beam.TGrid = new TGrid(dataArr[2], (int)dataArr[3]);
             beam.XGrid = new XGrid(dataArr[4]);
-            beam.WidthId = (int)dataArr[5];
+            ((IBeamObject)beam).WidthId = (int)dataArr[5];
         }
     }
 
@@ -53,7 +54,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 
             var beam = new BeamNext();
             CommonParse(beam, args);
-            beamStart.AddChildBeamObject(beam);
+            beamStart.AddChildObject(beam);
             return beam;
         }
     }
@@ -74,7 +75,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
 
             var beam = new BeamEnd();
             CommonParse(beam, args);
-            beamStart.AddChildBeamObject(beam);
+            beamStart.AddChildObject(beam);
             return beam;
         }
     }

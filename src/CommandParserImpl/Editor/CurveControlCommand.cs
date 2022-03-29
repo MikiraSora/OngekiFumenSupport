@@ -20,9 +20,11 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
         {
             var data = args.GetDataArray<float>();
 
+            var starts = fumen.Lanes.AsEnumerable<ConnectableStartObject>().Concat(fumen.Beams);
+
             var laneId = (int)data[1];
             var childOrder = (int)data[2];
-            if (fumen.Lanes.FirstOrDefault(x=>x.RecordId == laneId) is not ConnectableStartObject start)
+            if (starts.FirstOrDefault(x=>x.RecordId == laneId) is not ConnectableStartObject start)
                 throw new Exception($"can't parse LCO_CTRL because lane object (laneId:{laneId}) is not found.");
             if (start.Children.ElementAt(childOrder) is not ConnectableChildObjectBase child)
                 throw new Exception($"can't parse LCO_CTRL because child object (childOrder:{childOrder}) is not found.");

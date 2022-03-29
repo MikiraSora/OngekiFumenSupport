@@ -84,7 +84,8 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             }
 
             sb.AppendLine("#[CURVE]");
-            Process(fumen.Lanes);
+            var starts = fumen.Lanes.AsEnumerable<ConnectableStartObject>().Concat(fumen.Beams);
+            Process(starts);
         }
 
         private void ProcessLANE_BLOCK(OngekiFumen fumen, StringBuilder sb)
@@ -195,7 +196,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
 
         public void ProcessBEAM(OngekiFumen fumen, StringBuilder sb)
         {
-            void SerializeOutput(BeamBase o) => sb.AppendLine($"{o.IDShortName}\t{o.RecordId}\t{o.TGrid.Serialize()}\t{o.XGrid.Serialize()}\t{o.WidthId}");
+            void SerializeOutput(ConnectableObjectBase o) => sb.AppendLine($"{o.IDShortName}\t{o.RecordId}\t{o.TGrid.Serialize()}\t{o.XGrid.Serialize()}\t{((IBeamObject)o).WidthId}");
 
             sb.AppendLine("[BEAM]");
             foreach (var beamStart in fumen.Beams.OrderBy(x => x.RecordId))
