@@ -72,10 +72,10 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                     {
                         if (child.PathControls.Count > 0)
                         {
-                            sb.AppendLine($"LCO_PREC\t{id}\t{i}\t{child.CurvePrecision}");
+                            sb.AppendLine($"LCO_PREC\t{id}\t{i}\t{child.CurvePrecision}\t{lane.IDShortName}");
                             foreach (var control in child.PathControls)
                             {
-                                sb.AppendLine($"LCO_CTRL\t{id}\t{i}\t{control.TGrid.Unit}\t{control.TGrid.Grid}\t{control.XGrid.Unit}\t{control.XGrid.Grid}");
+                                sb.AppendLine($"LCO_CTRL\t{id}\t{i}\t{control.TGrid.Unit}\t{control.TGrid.Grid}\t{control.XGrid.Unit}\t{control.XGrid.Grid}\t{lane.IDShortName}");
                             }
                             sb.AppendLine();
                         }
