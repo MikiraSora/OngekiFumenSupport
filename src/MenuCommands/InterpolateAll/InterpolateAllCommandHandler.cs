@@ -11,11 +11,13 @@ using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 using Gemini.Framework.Threading;
 using OngekiFumenEditor.Base;
+using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
 using OngekiFumenEditor.Base.OngekiObjects.Lane.Base;
 using OngekiFumenEditor.Modules.FumenVisualEditor.Base;
 using OngekiFumenEditor.Modules.FumenVisualEditor.Kernel;
 using OngekiFumenEditor.Modules.FumenVisualEditor.ViewModels;
 using OngekiFumenEditor.Utils;
+using OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel;
 
 namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
 {
@@ -45,15 +47,15 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
         private void Process(FumenVisualEditorViewModel editor)
         {
             var fumen = editor.Fumen;
-            var curveStarts = fumen.Lanes.Where(x => x.Children.Any(x => x.PathControls.Count > 0)).ToList();
-            var affactObjects = fumen.Taps
-                .AsEnumerable<ILaneDockable>()
-                .Concat(fumen.Holds.SelectMany(x => new ILaneDockable[] { x, x.HoldEnd }))
-                .Where(x => x.ReferenceLaneStart?.RecordId is int id && curveStarts.Any(y => y.RecordId == id)).ToList();
 
-            var laneMap = curveStarts.ToDictionary(
-                x => x.RecordId,
-                x => x.InterpolateCurve().ToArray());
+            var laneMap = new Dictionary<ConnectableStartObject, List<ConnectableStartObject>>();
+
+            foreach ((var beforeLane, var genLanes) in InterpolateAll.Calculate(fumen))
+                laneMap[beforeLane] = genLanes.ToList();
+
+            var curveStarts = laneMap.Keys.ToList();
+
+            var affactObjects = InterpolateAll.CalculateAffectedDockableObjects(fumen, curveStarts).ToArray();
 
             var redoAction = new System.Action(() => { });
 
@@ -61,7 +63,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
 
             foreach (var item in laneMap)
             {
-                var beforeLane = curveStarts.FirstOrDefault(x => x.RecordId == item.Key);
+                var beforeLane = item.Key;
                 var afterLanes = item.Value;
 
                 redoAction += () =>
@@ -83,7 +85,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 var beforeXGrid = obj.XGrid;
                 var beforeLane = obj.ReferenceLaneStart;
 
-                (var afterLane, var afterXGrid) = laneMap[obj.ReferenceLaneStart.RecordId]
+                (var afterLane, var afterXGrid) = laneMap[obj.ReferenceLaneStart]
                     .Where(x => tGrid >= x.MinTGrid && tGrid <= x.MaxTGrid)
                     .Select(x => (x, x.CalulateXGrid(tGrid)))
                     .Where(x => x.Item2 is not null)
@@ -114,7 +116,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             };
 
             editor.UndoRedoManager.ExecuteAction(LambdaUndoAction.Create("插值所有曲线轨道", redoAction, undoAction));
-            Log.LogInfo($"插值计算完成,一共对 {curveStarts.Count} 条符合条件的轨道进行插值,生成了 {laneMap.Values.Select(x => x.Length).Sum()} 条新的轨道,对应 {affactObjects.Count()} 个受到影响的Tap/Hold等物件进行重新计算。");
+            Log.LogInfo($"插值计算完成,一共对 {curveStarts.Count} 条符合条件的轨道进行插值,生成了 {laneMap.Values.Select(x => x.Count).Sum()} 条新的轨道,对应 {affactObjects.Count()} 个受到影响的Tap/Hold等物件进行重新计算。");
         }
     }
 }

@@ -17,5 +17,8 @@ namespace OngekiFumenEditor.Kernel.MiscMenu
 
         [Export]
         public static MenuItemDefinition InterpolateAllMenuItem = new CommandMenuItemDefinition<InterpolateAllCommandDefinition>(OngekiFumenMenuGroup, 0);
+
+        [Export]
+        public static MenuItemDefinition StandardizeFormatMenuItem = new CommandMenuItemDefinition<StandardizeFormatCommandDefinition>(OngekiFumenMenuGroup, 1);
     }
 }

@@ -26,8 +26,4 @@
       <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Kernel\" />
-  </ItemGroup>
 </Project>
