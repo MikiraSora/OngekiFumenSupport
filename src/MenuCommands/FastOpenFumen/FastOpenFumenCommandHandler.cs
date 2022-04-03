@@ -37,7 +37,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
         public override async Task Run(Command command)
         {
             var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = FileDialogFilterHelper.BuildExtensionFilter((".ogkr", "已标准化的音击谱面"));
+            openFileDialog.Filter = FileDialogHelper.BuildExtensionFilter((".ogkr", "已标准化的音击谱面"));
             openFileDialog.Title = "新的谱面文件输出保存路径";
             openFileDialog.CheckFileExists = true;
 
@@ -49,7 +49,11 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             (var audioFile, var audioDuration) = await GetAudioFilePath(ogkrFilePath);
 
             if (!File.Exists(audioFile))
-                return;
+            {
+                audioFile = FileDialogHelper.OpenFile("手动选择音频文件", IoC.Get<IAudioManager>().SupportAudioFileExtensionList);
+                if (!File.Exists(audioFile))
+                    return;
+            }
 
             using var fs = File.OpenRead(ogkrFilePath);
             var fumen = await IoC.Get<IFumenParserManager>().GetDeserializer(ogkrFilePath).DeserializeAsync(fs);

@@ -38,7 +38,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             if (IoC.Get<IEditorDocumentManager>().CurrentActivatedEditor is not FumenVisualEditorViewModel editor)
                 return;
             var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = FileDialogFilterHelper.BuildExtensionFilter((".ogkr", "已标准化的音击谱面"));
+            saveFileDialog.Filter = FileDialogHelper.BuildExtensionFilter((".ogkr", "已标准化的音击谱面"));
             saveFileDialog.Title = "新的谱面文件输出保存路径";
 
             if (saveFileDialog.ShowDialog() != true)
