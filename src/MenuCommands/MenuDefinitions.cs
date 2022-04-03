@@ -20,5 +20,8 @@ namespace OngekiFumenEditor.Kernel.MiscMenu
 
         [Export]
         public static MenuItemDefinition StandardizeFormatMenuItem = new CommandMenuItemDefinition<StandardizeFormatCommandDefinition>(OngekiFumenMenuGroup, 1);
+
+        [Export]
+        public static MenuItemDefinition FastOpenFumenMenuItem = new CommandMenuItemDefinition<FastOpenFumenCommandDefinition>(Gemini.Modules.MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 8);
     }
 }
