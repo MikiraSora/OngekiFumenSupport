@@ -40,7 +40,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
             bpl.Speed = dataIntArr.ElementAtOrDefault(5);
             bpl.SizeValue = dataStrArr.ElementAtOrDefault(6)?.ToUpper() switch
             {
-                "L" => BulletSize.Lerge,
+                "L" => BulletSize.Large,
                 "N" or _ => BulletSize.Normal,
             };
             bpl.TypeValue = dataStrArr.ElementAtOrDefault(7)?.ToUpper() switch
