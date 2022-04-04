@@ -87,5 +87,10 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
 
             grid.NormalizeSelf();
         }
+
+        private static void PostProcessInterpolatedConnectableStart(ConnectableStartObject startObject)
+        {
+
+        }
     }
 }

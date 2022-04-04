@@ -51,8 +51,10 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             if (!File.Exists(audioFile))
             {
                 audioFile = FileDialogHelper.OpenFile("手动选择音频文件", IoC.Get<IAudioManager>().SupportAudioFileExtensionList);
+                audioDuration = await CalcAudioDuration(audioFile);
                 if (!File.Exists(audioFile))
                     return;
+
             }
 
             using var fs = File.OpenRead(ogkrFilePath);
@@ -115,14 +117,16 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 return default;
             }
 
-            var musicSourcePath = Path.Combine(ogkrFileDir, "..", "..", "musicsource", $"musicsource{musicId}");
+            var musicIdStr = musicId < 1000 ? "0" + musicId : musicId.ToString();
+
+            var musicSourcePath = Path.Combine(ogkrFileDir, "..", "..", "musicsource", $"musicsource{musicIdStr}");
             var audioExts = IoC.Get<IAudioManager>().SupportAudioFileExtensionList.Select(x => x.fileExt.TrimStart('.')).ToArray();
             var audioFile = "";
 
             if (Directory.Exists(musicSourcePath))
             {
                 //去对应的musicsource文件夹检查
-                audioFile = Directory.GetFiles(musicSourcePath, $"music{musicId}.*").Where(x => audioExts.Any(t => x.EndsWith(t))).FirstOrDefault();
+                audioFile = Directory.GetFiles(musicSourcePath, $"music{musicIdStr}.*").Where(x => audioExts.Any(t => x.EndsWith(t))).FirstOrDefault();
             }
 
             if (!File.Exists(audioFile))
@@ -130,10 +134,13 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 return default;
             }
 
-            using var audio = await IoC.Get<IAudioManager>().LoadAudioAsync(audioFile);
-            var durationMs = audio.Duration;
+            return (audioFile, await CalcAudioDuration(audioFile));
+        }
 
-            return (audioFile, durationMs);
+        private async Task<float> CalcAudioDuration(string audioFilePath)
+        {
+            using var audio = await IoC.Get<IAudioManager>().LoadAudioAsync(audioFilePath);
+            return audio.Duration;
         }
     }
 }
