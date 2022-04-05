@@ -27,7 +27,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
             return newFumen;
         }
 
-        public static async Task<OngekiFumen> Process(string newFilePath, OngekiFumen currentFumen)
+        public static async Task<OngekiFumen> Process(OngekiFumen currentFumen)
         {
             var fumen = await CopyFumenObject(currentFumen);
 
@@ -45,6 +45,8 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
                 var beforeLane = item.Key;
                 var afterLanes = item.Value;
 
+                PostProcessInterpolatedConnectableStart(beforeLane, afterLanes);
+
                 fumen.RemoveObject(beforeLane);
                 fumen.AddObjects(afterLanes);
             }
@@ -57,7 +59,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
 
                 (var afterLane, var afterXGrid) =
                     //考虑到处理HoldEnd的refLane之前，已经被前者Hold处理过了
-                    (laneMap.TryGetValue(obj.ReferenceLaneStart, out var genStarts) ? genStarts : Enumerable.Empty<ConnectableStartObject>())
+                    (obj.ReferenceLaneStart is not null && laneMap.TryGetValue(obj.ReferenceLaneStart, out var genStarts) ? genStarts : Enumerable.Empty<ConnectableStartObject>())
                     .Where(x => tGrid >= x.MinTGrid && tGrid <= x.MaxTGrid)
                     .Select(x => (x, x.CalulateXGrid(tGrid)))
                     .Where(x => x.Item2 is not null)
@@ -88,7 +90,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
             grid.NormalizeSelf();
         }
 
-        private static void PostProcessInterpolatedConnectableStart(ConnectableStartObject startObject)
+        private static void PostProcessInterpolatedConnectableStart(ConnectableStartObject rawStart, List<ConnectableStartObject> genStarts)
         {
 
         }

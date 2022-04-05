@@ -48,7 +48,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
 
             var newFilePath = saveFileDialog.FileName;
 
-            var fumen = await StandardizeFormat.Process(newFilePath, editor.Fumen);
+            var fumen = await StandardizeFormat.Process(editor.Fumen);
 
             editor.UnlockAllUserInteraction();
 
