@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\refHost\OngekiFumenEditor\gemini\src\Gemini\Gemini.csproj">
+    <ProjectReference Include="..\refHost\OngekiFumenEditor\Dependences\gemini\src\Gemini\Gemini.csproj">
       <Private>false</Private>
       <ExcludeAssets>runtime</ExcludeAssets>
     </ProjectReference>

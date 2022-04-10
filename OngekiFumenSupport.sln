@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32126.317
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OngekiFumenEditorPlugins.OngekiFumenSupport", "src\OngekiFumenEditorPlugins.OngekiFumenSupport.csproj", "{713DC2EE-952D-4DD8-9402-50BB44CB8E4D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OngekiFumenEditor", "refHost\OngekiFumenEditor\OngekiFumenEditor\OngekiFumenEditor.csproj", "{22F99DBC-4FD6-4FB0-B54D-E07BF7EBF0E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.Output", "refHost\OngekiFumenEditor\gemini\src\Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{80DC75EB-9641-4160-867A-1B37BC345961}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini", "refHost\OngekiFumenEditor\Dependences\gemini\src\Gemini\Gemini.csproj", "{AD749FA4-1DFD-414D-B584-0674606DEA1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini", "refHost\OngekiFumenEditor\gemini\src\Gemini\Gemini.csproj", "{F95190A2-3F72-4F44-966F-8B4422CAB5BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.Output", "refHost\OngekiFumenEditor\Dependences\gemini\src\Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{A550FB31-716B-4F7F-9EE7-8D567251B34B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{22F99DBC-4FD6-4FB0-B54D-E07BF7EBF0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22F99DBC-4FD6-4FB0-B54D-E07BF7EBF0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22F99DBC-4FD6-4FB0-B54D-E07BF7EBF0E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80DC75EB-9641-4160-867A-1B37BC345961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80DC75EB-9641-4160-867A-1B37BC345961}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80DC75EB-9641-4160-867A-1B37BC345961}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80DC75EB-9641-4160-867A-1B37BC345961}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F95190A2-3F72-4F44-966F-8B4422CAB5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F95190A2-3F72-4F44-966F-8B4422CAB5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F95190A2-3F72-4F44-966F-8B4422CAB5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F95190A2-3F72-4F44-966F-8B4422CAB5BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD749FA4-1DFD-414D-B584-0674606DEA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD749FA4-1DFD-414D-B584-0674606DEA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD749FA4-1DFD-414D-B584-0674606DEA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD749FA4-1DFD-414D-B584-0674606DEA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A550FB31-716B-4F7F-9EE7-8D567251B34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A550FB31-716B-4F7F-9EE7-8D567251B34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A550FB31-716B-4F7F-9EE7-8D567251B34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A550FB31-716B-4F7F-9EE7-8D567251B34B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
