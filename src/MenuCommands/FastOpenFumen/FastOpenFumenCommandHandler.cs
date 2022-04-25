@@ -108,7 +108,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 var match = new Regex(@"(\d+)_\d+").Match(Path.GetFileNameWithoutExtension(ogkrFilePath));
                 if (match.Success)
                 {
-                    musicId = int.Parse(match.Groups[0].Value);
+                    musicId = int.Parse(match.Groups[1].Value);
                 }
             }
 
