@@ -31,6 +31,9 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
         {
             var fumen = await CopyFumenObject(currentFumen);
 
+            //directly removes objects which not belong to ongeki.
+            fumen.SvgPrefabs.Clear();
+
             var laneMap = new Dictionary<ConnectableStartObject, List<ConnectableStartObject>>();
 
             foreach ((var beforeLane, var genLanes) in InterpolateAll.Calculate(fumen))
