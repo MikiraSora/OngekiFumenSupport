@@ -18,11 +18,13 @@ using OngekiFumenEditor.Modules.FumenVisualEditor.Kernel;
 using OngekiFumenEditor.Modules.FumenVisualEditor.ViewModels;
 using OngekiFumenEditor.Utils;
 using OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel;
+using OngekiFumenEditorPlugins.OngekiFumenSupport.MenuCommands;
 
 namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
 {
+
     [CommandHandler]
-    public class InterpolateAllCommandHandler : CommandHandlerBase<InterpolateAllCommandDefinition>
+    public class InterpolateAllCommandHandler : InterpolateAllCommandHandlerBase<InterpolateAllCommandDefinition>
     {
         public override void Update(Command command)
         {
@@ -38,85 +40,33 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 return TaskUtility.Completed;
             editor.LockAllUserInteraction();
 
-            Process(editor);
+            Process(editor, false);
 
             editor.UnlockAllUserInteraction();
             return TaskUtility.Completed;
         }
-
-        private void Process(FumenVisualEditorViewModel editor)
+    }
+    [CommandHandler]
+    public class InterpolateAllWithXGridLimitCommandHandler : InterpolateAllCommandHandlerBase<InterpolateAllWithXGridLimitCommandDefinition>
+    {
+        public override void Update(Command command)
         {
-            var fumen = editor.Fumen;
+            base.Update(command);
+            command.Enabled = IoC.Get<IEditorDocumentManager>().CurrentActivatedEditor is not null;
+        }
 
-            var laneMap = new Dictionary<ConnectableStartObject, List<ConnectableStartObject>>();
+        public override Task Run(Command command)
+        {
+            if (IoC.Get<IEditorDocumentManager>().CurrentActivatedEditor is not FumenVisualEditorViewModel editor)
+                return TaskUtility.Completed;
+            if (MessageBox.Show("是否插值所有包含曲线的轨道物件?\n可能将会删除并重新生成已经插值好的,不含曲线的轨道物件\n部分高度重叠的Tap/Hold物件可能会因此改变它依赖的轨道物件", "提醒", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+                return TaskUtility.Completed;
+            editor.LockAllUserInteraction();
 
-            foreach ((var beforeLane, var genLanes) in InterpolateAll.Calculate(fumen))
-                laneMap[beforeLane] = genLanes.ToList();
+            Process(editor, true);
 
-            var curveStarts = laneMap.Keys.ToList();
-
-            var affactObjects = InterpolateAll.CalculateAffectedDockableObjects(fumen, curveStarts).ToArray();
-
-            var redoAction = new System.Action(() => { });
-
-            var undoAction = new System.Action(() => { });
-
-            foreach (var item in laneMap)
-            {
-                var beforeLane = item.Key;
-                var afterLanes = item.Value;
-
-                redoAction += () =>
-                {
-                    fumen.RemoveObject(beforeLane);
-                    fumen.AddObjects(afterLanes);
-                };
-
-                undoAction += () =>
-                {
-                    fumen.AddObject(beforeLane);
-                    fumen.RemoveObjects(afterLanes);
-                };
-            }
-
-            foreach (var obj in affactObjects)
-            {
-                var tGrid = obj.TGrid;
-                var beforeXGrid = obj.XGrid;
-                var beforeLane = obj.ReferenceLaneStart;
-
-                (var afterLane, var afterXGrid) = laneMap[obj.ReferenceLaneStart]
-                    .Where(x => tGrid >= x.MinTGrid && tGrid <= x.MaxTGrid)
-                    .Select(x => (x, x.CalulateXGrid(tGrid)))
-                    .Where(x => x.Item2 is not null)
-                    .OrderBy(x => x.Item2)
-                    .FirstOrDefault();
-
-                redoAction += () =>
-                {
-                    obj.ReferenceLaneStart = afterLane as LaneStartBase;
-                    //obj.XGrid = afterXGrid;
-                };
-
-                undoAction += () =>
-                {
-                    obj.ReferenceLaneStart = beforeLane;
-                    //obj.XGrid = beforeXGrid;
-                };
-            }
-
-            redoAction += () =>
-            {
-                editor.Redraw(RedrawTarget.OngekiObjects);
-            };
-
-            undoAction += () =>
-            {
-                editor.Redraw(RedrawTarget.OngekiObjects);
-            };
-
-            editor.UndoRedoManager.ExecuteAction(LambdaUndoAction.Create("插值所有曲线轨道", redoAction, undoAction));
-            Log.LogInfo($"插值计算完成,一共对 {curveStarts.Count} 条符合条件的轨道进行插值,生成了 {laneMap.Values.Select(x => x.Count).Sum()} 条新的轨道,对应 {affactObjects.Count()} 个受到影响的Tap/Hold等物件进行重新计算。");
+            editor.UnlockAllUserInteraction();
+            return TaskUtility.Completed;
         }
     }
 }

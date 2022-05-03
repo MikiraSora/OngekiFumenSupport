@@ -19,6 +19,9 @@ namespace OngekiFumenEditor.Kernel.MiscMenu
         public static MenuItemDefinition InterpolateAllMenuItem = new CommandMenuItemDefinition<InterpolateAllCommandDefinition>(OngekiFumenMenuGroup, 0);
 
         [Export]
+        public static MenuItemDefinition InterpolateAllWithXGridLimitCommandDefinitionMenuItem = new CommandMenuItemDefinition<InterpolateAllWithXGridLimitCommandDefinition>(OngekiFumenMenuGroup, 0);
+
+        [Export]
         public static MenuItemDefinition StandardizeFormatMenuItem = new CommandMenuItemDefinition<StandardizeFormatCommandDefinition>(OngekiFumenMenuGroup, 1);
 
         [Export]

@@ -22,4 +22,25 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             get { return Text; }
         }
     }
+
+    [CommandDefinition]
+    public class InterpolateAllWithXGridLimitCommandDefinition : CommandDefinition
+    {
+        public const string CommandName = "OngekiFumen.InterpolateAllWithXGridLimit";
+
+        public override string Name
+        {
+            get { return CommandName; }
+        }
+
+        public override string Text
+        {
+            get { return "插值所有曲线轨道(XGrid限制)"; }
+        }
+
+        public override string ToolTip
+        {
+            get { return Text; }
+        }
+    }
 }
