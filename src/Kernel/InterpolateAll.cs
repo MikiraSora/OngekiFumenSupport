@@ -1,5 +1,6 @@
 ﻿using OngekiFumenEditor.Base;
 using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
+using OngekiFumenEditor.Kernel.CurveInterpolater.DefaultImpl.Factory;
 using OngekiFumenEditor.Utils;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
 
             var laneMap = curveStarts.ToDictionary(
                 x => x.RecordId,
-                x => x.InterpolateCurve(xGridLimit ? new XGridLimitedCurveInterpolaterTraveller(x) : default).ToArray());
+                x => x.InterpolateCurve(xGridLimit ? XGridLimitedCurveInterpolaterFactory.Default : default).ToArray());
 
             foreach (var item in laneMap)
             {
