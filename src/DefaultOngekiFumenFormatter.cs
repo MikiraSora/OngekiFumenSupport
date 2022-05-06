@@ -66,7 +66,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
         private void ProcessSVG(OngekiFumen fumen, StringBuilder sb)
         {
             foreach (var svgPrefab in fumen.SvgPrefabs)
-                sb.Append($"Svg\t{svgPrefab.LimitXGridUnitSimply}\t{svgPrefab.ColorSimilar.CurrentValue}\t{svgPrefab.Rotation.CurrentValue}\t{svgPrefab.EnableColorfulLaneSimilar}\t{svgPrefab.OffsetX.CurrentValue}\t{svgPrefab.OffsetY.CurrentValue}\t{svgPrefab.ShowOriginColor}\t{svgPrefab.Opacity.CurrentValue}\t{svgPrefab.Scale}\t{svgPrefab.Tolerance.CurrentValue}\t{svgPrefab.TGrid.Unit}\t{svgPrefab.TGrid.Grid}\t{svgPrefab.XGrid.Unit}\t{svgPrefab.XGrid.Grid}\t{Convert.ToBase64String(Encoding.UTF8.GetBytes(svgPrefab.SvgFile?.FullName))}");
+                sb.Append($"Svg\t{svgPrefab.ColorSimilar.CurrentValue}\t{svgPrefab.Rotation.CurrentValue}\t{svgPrefab.EnableColorfulLaneSimilar}\t{svgPrefab.OffsetX.CurrentValue}\t{svgPrefab.OffsetY.CurrentValue}\t{svgPrefab.ShowOriginColor}\t{svgPrefab.Opacity.CurrentValue}\t{svgPrefab.Scale}\t{svgPrefab.Tolerance.CurrentValue}\t{svgPrefab.TGrid.Unit}\t{svgPrefab.TGrid.Grid}\t{svgPrefab.XGrid.Unit}\t{svgPrefab.XGrid.Grid}\t{Convert.ToBase64String(Encoding.UTF8.GetBytes(svgPrefab.SvgFile?.FullName))}");
         }
 
         private void ProcessCURVE(OngekiFumen fumen, StringBuilder sb)
