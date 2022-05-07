@@ -1,6 +1,8 @@
 ﻿using OngekiFumenEditor.Base;
 using OngekiFumenEditor.Base.EditorObjects.Svg;
+using OngekiFumenEditor.Base.OngekiObjects;
 using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
+using OngekiFumenEditor.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -42,7 +44,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
     }
 
     [Export(typeof(ICommandParser))]
-    public class SvgPrefabCommand : SvgPrefabCommandBase
+    public class SvgImageFilePrefabCommand : SvgPrefabCommandBase
     {
         public override string CommandLineHeader => "SVG_IMG";
 
@@ -50,6 +52,23 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
         {
             var svg = new SvgImageFilePrefab();
             svg.SvgFile = new System.IO.FileInfo(Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(14))));
+            return svg;
+        }
+    }
+
+    [Export(typeof(ICommandParser))]
+    public class SvgStringPrefabCommand : SvgPrefabCommandBase
+    {
+        public override string CommandLineHeader => "SVG_STR";
+
+        public override SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen)
+        {
+            var svg = new SvgStringPrefab();
+            svg.Content = Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(14)));
+            svg.FontSize = args.GetData<double>(15);
+            var colorId = args.GetData<int>(16);
+            svg.FontColor = ColorIdConst.AllColors.FirstOrDefault(x => x.Id == colorId);
+            svg.TypefaceName = Base64.Decode(args.GetData<string>(17));
             return svg;
         }
     }

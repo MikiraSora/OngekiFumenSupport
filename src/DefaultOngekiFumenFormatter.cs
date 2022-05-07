@@ -73,7 +73,10 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                 switch (svgPrefab)
                 {
                     case SvgImageFilePrefab svgImageFilePrefab:
-                        sb.Append($"\t{Convert.ToBase64String(Encoding.UTF8.GetBytes(svgImageFilePrefab.SvgFile?.FullName))}");
+                        sb.Append($"\t{Base64.Encode(svgImageFilePrefab.SvgFile?.FullName)}");
+                        break;
+                    case SvgStringPrefab svgStringPrefab:
+                        sb.Append($"\t{Base64.Encode(svgStringPrefab.Content)}\t{svgStringPrefab.FontSize}\t{svgStringPrefab.FontColor.Id}\t{Base64.Encode(svgStringPrefab.TypefaceName)}");
                         break;
                     default:
                         break;
