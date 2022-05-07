@@ -10,14 +10,18 @@ using System.Threading.Tasks;
 
 namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
 {
-    [Export(typeof(ICommandParser))]
-    public class SvgPrefabCommand : CommandParserBase
+    public abstract class SvgPrefabCommandBase : ICommandParser
     {
-        public override string CommandLineHeader => "Svg";
+        public abstract string CommandLineHeader { get; }
 
-        public override OngekiObjectBase Parse(CommandArgs args, OngekiFumen fumen)
+        public void AfterParse(OngekiObjectBase obj, OngekiFumen fumen)
         {
-            var svg = new SvgPrefab();
+
+        }
+
+        public OngekiObjectBase Parse(CommandArgs args, OngekiFumen fumen)
+        {
+            var svg = CreateAndParseSvgObject(args, fumen);
 
             svg.ColorSimilar.CurrentValue = args.GetData<float>(1);
             svg.Rotation.CurrentValue = args.GetData<float>(2);
@@ -30,8 +34,22 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
             svg.Tolerance.CurrentValue = args.GetData<float>(9);
             svg.TGrid = new TGrid(args.GetData<float>(10), args.GetData<int>(11));
             svg.XGrid = new XGrid(args.GetData<float>(12), args.GetData<int>(13));
-            svg.SvgFile = new System.IO.FileInfo(Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(14))));
 
+            return svg;
+        }
+
+        public abstract SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen);
+    }
+
+    [Export(typeof(ICommandParser))]
+    public class SvgPrefabCommand : SvgPrefabCommandBase
+    {
+        public override string CommandLineHeader => "SVG_IMG";
+
+        public override SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen)
+        {
+            var svg = new SvgImageFilePrefab();
+            svg.SvgFile = new System.IO.FileInfo(Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(14))));
             return svg;
         }
     }
