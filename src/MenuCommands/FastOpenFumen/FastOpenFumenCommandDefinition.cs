@@ -1,4 +1,6 @@
 ﻿using Gemini.Framework.Commands;
+using System.ComponentModel.Composition;
+using System.Windows.Input;
 
 namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
 {
@@ -21,5 +23,8 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
         {
             get { return Text; }
         }
+
+        [Export]
+        public static CommandKeyboardShortcut KeyGesture = new CommandKeyboardShortcut<FastOpenFumenCommandDefinition>(new(Key.F, ModifierKeys.Control));
     }
 }

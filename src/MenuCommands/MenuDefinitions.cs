@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Gemini.Framework.Menus;
+using OngekiFumenEditor.Kernel.MenuCommands.AppendEndLaneObject;
 using OngekiFumenEditor.Kernel.MiscMenu.Commands;
 using OngekiFumenEditor.Modules.AudioPlayerToolViewer.Commands;
 using OngekiFumenEditor.Modules.FumenBulletPalleteListViewer.Commands;
@@ -23,6 +24,9 @@ namespace OngekiFumenEditor.Kernel.MiscMenu
 
         [Export]
         public static MenuItemDefinition StandardizeFormatMenuItem = new CommandMenuItemDefinition<StandardizeFormatCommandDefinition>(OngekiFumenMenuGroup, 1);
+
+        [Export]
+        public static MenuItemDefinition AppendEndLaneObjectMenuItem = new CommandMenuItemDefinition<AppendEndLaneObjectCommandDefinition>(OngekiFumenMenuGroup, 0);
 
         [Export]
         public static MenuItemDefinition FastOpenFumenMenuItem = new CommandMenuItemDefinition<FastOpenFumenCommandDefinition>(Gemini.Modules.MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 8);
