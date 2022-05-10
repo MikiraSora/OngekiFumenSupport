@@ -80,7 +80,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                     case SvgStringPrefab svgStringPrefab:
                         if (string.IsNullOrWhiteSpace(svgStringPrefab.Content) || string.IsNullOrWhiteSpace(svgStringPrefab.TypefaceName))
                             throw new Exception($"at {svgPrefab.TGrid}, SvgStringPrefab.Content/TypefaceName is empty or null");
-                        sb.Append($"\t{Base64.Encode(svgStringPrefab.Content)}\t{svgStringPrefab.FontSize}\t{svgStringPrefab.FontColor.Id}\t{Base64.Encode(svgStringPrefab.TypefaceName)}");
+                        sb.Append($"\t{Base64.Encode(svgStringPrefab.Content)}\t{svgStringPrefab.FontSize}\t{svgStringPrefab.FontColor.Id}\t{Base64.Encode(svgStringPrefab.TypefaceName)}\t{svgStringPrefab.ContentFlowDirection}\t{svgStringPrefab.ContentLineHeight}");
                         break;
                     default:
                         break;

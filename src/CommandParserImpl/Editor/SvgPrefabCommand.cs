@@ -69,6 +69,8 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
             var colorId = args.GetData<int>(16);
             svg.FontColor = ColorIdConst.AllColors.FirstOrDefault(x => x.Id == colorId);
             svg.TypefaceName = Base64.Decode(args.GetData<string>(17));
+            svg.ContentFlowDirection = Enum.Parse<SvgStringPrefab.FlowDirection>(args.GetData<string>(18));
+            svg.ContentLineHeight = args.GetData<double>(19);
             return svg;
         }
     }
