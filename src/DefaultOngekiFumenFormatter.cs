@@ -73,9 +73,13 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                 switch (svgPrefab)
                 {
                     case SvgImageFilePrefab svgImageFilePrefab:
+                        if (string.IsNullOrWhiteSpace(svgImageFilePrefab.SvgFile?.FullName))
+                            throw new Exception($"at {svgPrefab.TGrid}, SvgImageFilePrefab.SvgFile is empty or null");
                         sb.Append($"\t{Base64.Encode(svgImageFilePrefab.SvgFile?.FullName)}");
                         break;
                     case SvgStringPrefab svgStringPrefab:
+                        if (string.IsNullOrWhiteSpace(svgStringPrefab.Content) || string.IsNullOrWhiteSpace(svgStringPrefab.TypefaceName))
+                            throw new Exception($"at {svgPrefab.TGrid}, SvgStringPrefab.Content/TypefaceName is empty or null");
                         sb.Append($"\t{Base64.Encode(svgStringPrefab.Content)}\t{svgStringPrefab.FontSize}\t{svgStringPrefab.FontColor.Id}\t{Base64.Encode(svgStringPrefab.TypefaceName)}");
                         break;
                     default:
