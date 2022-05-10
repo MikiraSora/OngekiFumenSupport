@@ -36,6 +36,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
             svg.Tolerance.CurrentValue = args.GetData<float>(9);
             svg.TGrid = new TGrid(args.GetData<float>(10), args.GetData<int>(11));
             svg.XGrid = new XGrid(args.GetData<float>(12), args.GetData<int>(13));
+            svg.ColorfulLaneBrightness.CurrentValue = args.GetData<int>(14);
 
             return svg;
         }
@@ -64,13 +65,15 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
         public override SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen)
         {
             var svg = new SvgStringPrefab();
-            svg.Content = Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(14)));
-            svg.FontSize = args.GetData<double>(15);
-            var colorId = args.GetData<int>(16);
+            var i = 15;
+
+            svg.Content = Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(i++)));
+            svg.FontSize = args.GetData<double>(i++);
+            var colorId = args.GetData<int>(i++);
             svg.FontColor = ColorIdConst.AllColors.FirstOrDefault(x => x.Id == colorId);
-            svg.TypefaceName = Base64.Decode(args.GetData<string>(17));
-            svg.ContentFlowDirection = Enum.Parse<SvgStringPrefab.FlowDirection>(args.GetData<string>(18));
-            svg.ContentLineHeight = args.GetData<double>(19);
+            svg.TypefaceName = Base64.Decode(args.GetData<string>(i++));
+            svg.ContentFlowDirection = Enum.Parse<SvgStringPrefab.FlowDirection>(args.GetData<string>(i++));
+            svg.ContentLineHeight = args.GetData<double>(i++);
             return svg;
         }
     }
