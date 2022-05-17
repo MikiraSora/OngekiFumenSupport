@@ -85,7 +85,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             await IoC.Get<IShell>().OpenDocumentAsync(editor);
         }
 
-        private async Task<(string, float)> GetAudioFilePath(string ogkrFilePath)
+        private async Task<(string, TimeSpan)> GetAudioFilePath(string ogkrFilePath)
         {
             var ogkrFileDir = Path.GetDirectoryName(ogkrFilePath);
             var musicXmlFilePath = Path.Combine(ogkrFileDir, "Music.xml");
@@ -137,7 +137,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             return (audioFile, await CalcAudioDuration(audioFile));
         }
 
-        private async Task<float> CalcAudioDuration(string audioFilePath)
+        private async Task<TimeSpan> CalcAudioDuration(string audioFilePath)
         {
             using var audio = await IoC.Get<IAudioManager>().LoadAudioAsync(audioFilePath);
             return audio.Duration;
