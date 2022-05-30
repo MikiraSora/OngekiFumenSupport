@@ -165,7 +165,35 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             sb.AppendLine("[B_PALETTE]");
 
             foreach (var bpl in fumen.BulletPalleteList.OrderBy(x => x.StrID))
-                sb.AppendLine($"{bpl.IDShortName}\t{bpl.StrID}\t{bpl.ShooterValue}\t{bpl.PlaceOffset}\t{bpl.TargetValue}\t{bpl.Speed}\t{bpl.SizeValue}\t{bpl.TypeValue}");
+            {
+                var shoot = bpl.ShooterValue switch
+                {
+                    BulletPallete.Shooter.TargetHead => "UPS",
+                    BulletPallete.Shooter.Enemy => "ENE",
+                    BulletPallete.Shooter.Center => "CEN",
+                };
+
+                var target = bpl.TargetValue switch
+                {
+                    BulletPallete.Target.Player => "PLR",
+                    BulletPallete.Target.FixField => "FIX",
+                };
+
+                var size = bpl.SizeValue switch
+                {
+                    BulletPallete.BulletSize.Normal => "N",
+                    BulletPallete.BulletSize.Large => "L",
+                };
+
+                var type = bpl.TypeValue switch
+                {
+                    BulletPallete.BulletType.Circle => "CIR",
+                    BulletPallete.BulletType.Needle => "NDL",
+                    BulletPallete.BulletType.Square => "SQR",
+                };
+
+                sb.AppendLine($"{bpl.IDShortName}\t{bpl.StrID}\t{shoot}\t{bpl.PlaceOffset}\t{target}\t{bpl.Speed}\t{size}\t{type}");
+            }
         }
 
 
@@ -220,7 +248,17 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
         {
             sb.AppendLine("[BULLET]");
             foreach (var u in fumen.Bullets.OrderBy(x => x.TGrid))
-                sb.AppendLine($"{u.IDShortName}\t{u.ReferenceBulletPallete?.StrID}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}\t{u.BulletDamageTypeValue}");
+            {
+                var damage = u.BulletDamageTypeValue switch
+                {
+                    Bullet.BulletDamageType.Normal => "NML",
+                    Bullet.BulletDamageType.Hard => "STR",
+                    Bullet.BulletDamageType.Danger => "DNG",
+                };
+
+                sb.AppendLine($"{u.IDShortName}\t{u.ReferenceBulletPallete?.StrID}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}\t{damage}");
+
+            }
         }
 
         public void ProcessBEAM(OngekiFumen fumen, StringBuilder sb)
