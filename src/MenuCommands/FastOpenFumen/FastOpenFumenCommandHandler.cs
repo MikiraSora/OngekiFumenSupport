@@ -117,9 +117,9 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 return default;
             }
 
-            var musicIdStr = musicId < 1000 ? "0" + musicId : musicId.ToString();
+            var musicIdStr = musicId < 1000 ? string.Concat("0".Repeat(4 - (musicId.ToString().Length))) + musicId : musicId.ToString();
 
-            var musicSourcePath = Path.Combine(ogkrFileDir, "..", "..", "musicsource", $"musicsource{musicIdStr}");
+            var musicSourcePath = Path.GetFullPath(Path.Combine(ogkrFileDir, "..", "..", "musicsource", $"musicsource{musicIdStr}"));
             var audioExts = IoC.Get<IAudioManager>().SupportAudioFileExtensionList.Select(x => x.fileExt.TrimStart('.')).ToArray();
             var audioFile = "";
 
