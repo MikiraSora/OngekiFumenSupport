@@ -38,14 +38,14 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
     {
         public override OngekiObjectBase Parse(CommandArgs args, OngekiFumen fumen)
         {
-            var beamRecordId = args.GetData<int>(1);
-            var beam = new T()
+            var laneRecordId = args.GetData<int>(1);
+            var laneObject = new T()
             {
-                RecordId = beamRecordId
+                RecordId = laneRecordId
             };
 
-            CommonParse(beam, args, fumen);
-            return beam;
+            CommonParse(laneObject, args, fumen);
+            return laneObject;
         }
     }
 
@@ -60,10 +60,10 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
                 return default;
             }
 
-            var beam = new T();
-            CommonParse(beam, args, fumen);
-            beamStart.AddChildObject(beam);
-            return beam;
+            var laneObject = new T();
+            CommonParse(laneObject, args, fumen);
+            beamStart.AddChildObject(laneObject);
+            return null;
         }
     }
 
