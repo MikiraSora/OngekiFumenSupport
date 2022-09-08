@@ -51,10 +51,9 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             if (!File.Exists(audioFile))
             {
                 audioFile = FileDialogHelper.OpenFile("手动选择音频文件", IoC.Get<IAudioManager>().SupportAudioFileExtensionList);
-                audioDuration = await CalcAudioDuration(audioFile);
                 if (!File.Exists(audioFile))
                     return;
-
+                audioDuration = await CalcAudioDuration(audioFile);
             }
 
             using var fs = File.OpenRead(ogkrFilePath);
