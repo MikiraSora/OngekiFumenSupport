@@ -47,7 +47,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
     [Export(typeof(ICommandParser))]
     public class SvgImageFilePrefabCommand : SvgPrefabCommandBase
     {
-        public override string CommandLineHeader => "SVG_IMG";
+        public override string CommandLineHeader => SvgImageFilePrefab.CommandName;
 
         public override SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen)
         {
@@ -60,7 +60,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
     [Export(typeof(ICommandParser))]
     public class SvgStringPrefabCommand : SvgPrefabCommandBase
     {
-        public override string CommandLineHeader => "SVG_STR";
+        public override string CommandLineHeader => SvgStringPrefab.CommandName;
 
         public override SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen)
         {
