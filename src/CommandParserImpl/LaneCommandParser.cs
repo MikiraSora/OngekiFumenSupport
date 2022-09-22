@@ -28,7 +28,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
             if (connectObject is IColorfulLane colorfulLane)
             {
                 var colorId = (int)dataArr[5];
-                colorfulLane.ColorId = ColorIdConst.AllColors.FirstOrDefault(x => x.Id == colorId, ColorIdConst.Akari);
+                colorfulLane.ColorId = ColorIdConst.AllColors.FirstOrDefault(x => x.Id == colorId);
                 colorfulLane.Brightness = (int)dataArr[6];
             }
         }
