@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
 
   <Target Condition="'$(Configuration)'=='DEBUG'" Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)$(OutDir)*&quot; &quot;$(SolutionDir)refHost\OngekiFumenEditor\OngekiFumenEditor\bin\$(ConfigurationName)\net5.0-windows\Plugins\$(ProjectName)\&quot; /e /s /y" />
+    <Exec Command="xcopy &quot;$(ProjectDir)$(OutDir)*&quot; &quot;$(SolutionDir)refHost\OngekiFumenEditor\OngekiFumenEditor\bin\$(ConfigurationName)\net6.0-windows\Plugins\$(ProjectName)\&quot; /e /s /y" />
   </Target>
 
   <ItemGroup>
