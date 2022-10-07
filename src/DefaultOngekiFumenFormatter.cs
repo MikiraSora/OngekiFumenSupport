@@ -171,18 +171,21 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                     BulletPallete.Shooter.TargetHead => "UPS",
                     BulletPallete.Shooter.Enemy => "ENE",
                     BulletPallete.Shooter.Center => "CEN",
+                    _ => default
                 };
 
                 var target = bpl.TargetValue switch
                 {
                     BulletPallete.Target.Player => "PLR",
                     BulletPallete.Target.FixField => "FIX",
+                    _ => default
                 };
 
                 var size = bpl.SizeValue switch
                 {
                     BulletPallete.BulletSize.Normal => "N",
                     BulletPallete.BulletSize.Large => "L",
+                    _ => default
                 };
 
                 var type = bpl.TypeValue switch
@@ -190,6 +193,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                     BulletPallete.BulletType.Circle => "CIR",
                     BulletPallete.BulletType.Needle => "NDL",
                     BulletPallete.BulletType.Square => "SQR",
+                    _ => default
                 };
 
                 sb.AppendLine($"{bpl.IDShortName}\t{bpl.StrID}\t{shoot}\t{bpl.PlaceOffset}\t{target}\t{bpl.Speed}\t{size}\t{type}");
@@ -254,6 +258,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                     Bullet.BulletDamageType.Normal => "NML",
                     Bullet.BulletDamageType.Hard => "STR",
                     Bullet.BulletDamageType.Danger => "DNG",
+                    _ => default
                 };
 
                 sb.AppendLine($"{u.IDShortName}\t{u.ReferenceBulletPallete?.StrID}\t{u.TGrid.Serialize()}\t{u.XGrid.Serialize()}\t{damage}");

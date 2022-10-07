@@ -52,7 +52,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
         public override SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen)
         {
             var svg = new SvgImageFilePrefab();
-            svg.SvgFile = new System.IO.FileInfo(Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(14))));
+            svg.SvgFile = new System.IO.FileInfo(Base64.Decode(args.GetData<string>(15)));
             return svg;
         }
     }
@@ -67,7 +67,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
             var svg = new SvgStringPrefab();
             var i = 15;
 
-            svg.Content = Encoding.UTF8.GetString(Convert.FromBase64String(args.GetData<string>(i++)));
+            svg.Content = Base64.Decode(args.GetData<string>(i++));
             svg.FontSize = args.GetData<double>(i++);
             var colorId = args.GetData<int>(i++);
             svg.FontColor = ColorIdConst.AllColors.FirstOrDefault(x => x.Id == colorId);
