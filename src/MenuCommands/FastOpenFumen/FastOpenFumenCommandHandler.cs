@@ -37,8 +37,8 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
         public override async Task Run(Command command)
         {
             var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = FileDialogHelper.BuildExtensionFilter((".ogkr", "已标准化的音击谱面"));
-            openFileDialog.Title = "新的谱面文件输出保存路径";
+            openFileDialog.Filter = FileDialogHelper.BuildExtensionFilter((".ogkr", "音击谱面"));
+            openFileDialog.Title = "快速打开音击谱面";
             openFileDialog.CheckFileExists = true;
 
             if (openFileDialog.ShowDialog() != true)
@@ -77,11 +77,36 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 {
                     frameworkElement.Loaded -= loadedHandler;
                     await provider.Open(editor, newProj);
+                    var docName = await TryFormatOpenFileName(ogkrFilePath);
+
+                    if (editor is FumenVisualEditorViewModel e)
+                        e.SpecifyDefaultName = docName;
+                    else
+                        editor.DisplayName = docName;
                 };
                 frameworkElement.Loaded += loadedHandler;
             };
 
             await IoC.Get<IShell>().OpenDocumentAsync(editor);
+        }
+
+        private async Task<string> TryFormatOpenFileName(string ogkrFilePath)
+        {
+            var result = Path.GetFileName(ogkrFilePath);
+
+            if (ogkrFilePath.EndsWith(".ogkr"))
+            {
+                var ogkrFileDir = Path.GetDirectoryName(ogkrFilePath);
+                var musicXmlFilePath = Path.Combine(ogkrFileDir, "Music.xml");
+
+                //从Music.xml读取musicId
+                var musicXml = await XDocument.LoadAsync(File.OpenRead(musicXmlFilePath), LoadOptions.None, default);
+                var element = musicXml.XPathSelectElement(@"//Name[1]/str[1]");
+                if (element?.Value is string name)
+                    result = name;
+            }
+
+            return "[快速打开] " + result;
         }
 
         private async Task<(string, TimeSpan)> GetAudioFilePath(string ogkrFilePath)
@@ -93,7 +118,7 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
             if (File.Exists(musicXmlFilePath))
             {
                 //从Music.xml读取musicId
-                var musicXml = XDocument.Parse(File.ReadAllText(musicXmlFilePath));
+                var musicXml = await XDocument.LoadAsync(File.OpenRead(musicXmlFilePath), LoadOptions.None, default);
                 var element = musicXml.XPathSelectElement(@"//MusicSourceName[1]/id[1]");
                 if (element != null)
                 {

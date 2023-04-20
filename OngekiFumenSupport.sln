@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OngekiFumenEditorPlugins.OngekiFumenSupport", "src\OngekiFumenEditorPlugins.OngekiFumenSupport.csproj", "{713DC2EE-952D-4DD8-9402-50BB44CB8E4D}"
 EndProject
@@ -10,6 +10,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini", "refHost\OngekiFumenEditor\Dependences\gemini\src\Gemini\Gemini.csproj", "{AD749FA4-1DFD-414D-B584-0674606DEA1E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.Output", "refHost\OngekiFumenEditor\Dependences\gemini\src\Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{A550FB31-716B-4F7F-9EE7-8D567251B34B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{C144FD0C-A80D-4D8B-91B8-7F320A5B53BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polyline2DCSharp", "refHost\OngekiFumenEditor\Dependences\Polyline2D.CSharp\Polyline2D.CSharp\Polyline2D.CSharp\Polyline2DCSharp.csproj", "{C632F74B-E74C-438A-8AAB-8F20E502E752}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgConverter", "refHost\OngekiFumenEditor\Dependences\SvgToXaml\SvgConverter\SvgConverter.csproj", "{6E835135-496B-4E75-9AC7-6D0323883CBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +39,23 @@ Global
 		{A550FB31-716B-4F7F-9EE7-8D567251B34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A550FB31-716B-4F7F-9EE7-8D567251B34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A550FB31-716B-4F7F-9EE7-8D567251B34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C632F74B-E74C-438A-8AAB-8F20E502E752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C632F74B-E74C-438A-8AAB-8F20E502E752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C632F74B-E74C-438A-8AAB-8F20E502E752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C632F74B-E74C-438A-8AAB-8F20E502E752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E835135-496B-4E75-9AC7-6D0323883CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E835135-496B-4E75-9AC7-6D0323883CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E835135-496B-4E75-9AC7-6D0323883CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E835135-496B-4E75-9AC7-6D0323883CBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD749FA4-1DFD-414D-B584-0674606DEA1E} = {C144FD0C-A80D-4D8B-91B8-7F320A5B53BA}
+		{A550FB31-716B-4F7F-9EE7-8D567251B34B} = {C144FD0C-A80D-4D8B-91B8-7F320A5B53BA}
+		{C632F74B-E74C-438A-8AAB-8F20E502E752} = {C144FD0C-A80D-4D8B-91B8-7F320A5B53BA}
+		{6E835135-496B-4E75-9AC7-6D0323883CBC} = {C144FD0C-A80D-4D8B-91B8-7F320A5B53BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4314C777-BD9C-4720-B531-9EB5C9FD682D}
