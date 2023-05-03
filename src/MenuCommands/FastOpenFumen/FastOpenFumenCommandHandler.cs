@@ -100,10 +100,13 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
                 var musicXmlFilePath = Path.Combine(ogkrFileDir, "Music.xml");
 
                 //从Music.xml读取musicId
-                var musicXml = await XDocument.LoadAsync(File.OpenRead(musicXmlFilePath), LoadOptions.None, default);
-                var element = musicXml.XPathSelectElement(@"//Name[1]/str[1]");
-                if (element?.Value is string name)
-                    result = name;
+                if (File.Exists(musicXmlFilePath))
+                {
+                    var musicXml = await XDocument.LoadAsync(File.OpenRead(musicXmlFilePath), LoadOptions.None, default);
+                    var element = musicXml.XPathSelectElement(@"//Name[1]/str[1]");
+                    if (element?.Value is string name)
+                        result = name;
+                }
             }
 
             return "[快速打开] " + result;
