@@ -6,6 +6,7 @@ using OngekiFumenEditor.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,7 +53,9 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl.Editor
         public override SvgPrefabBase CreateAndParseSvgObject(CommandArgs args, OngekiFumen fumen)
         {
             var svg = new SvgImageFilePrefab();
-            svg.SvgFile = new System.IO.FileInfo(Base64.Decode(args.GetData<string>(15)));
+            var filePath = Base64.Decode(args.GetData<string>(15));
+            if (File.Exists(filePath))
+                svg.SvgFile = new FileInfo(filePath);
             return svg;
         }
     }
