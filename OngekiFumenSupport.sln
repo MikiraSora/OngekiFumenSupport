@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polyline2DCSharp", "refHost
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgConverter", "refHost\OngekiFumenEditor\Dependences\SvgToXaml\SvgConverter\SvgConverter.csproj", "{6E835135-496B-4E75-9AC7-6D0323883CBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{90568B9A-7B60-460D-860C-4C771A599F9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{6E835135-496B-4E75-9AC7-6D0323883CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E835135-496B-4E75-9AC7-6D0323883CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E835135-496B-4E75-9AC7-6D0323883CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90568B9A-7B60-460D-860C-4C771A599F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90568B9A-7B60-460D-860C-4C771A599F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90568B9A-7B60-460D-860C-4C771A599F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90568B9A-7B60-460D-860C-4C771A599F9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
