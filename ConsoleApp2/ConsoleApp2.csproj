@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\refHost\OngekiFumenEditor\Dependences\gemini\src\Gemini\Gemini.csproj" />
     <ProjectReference Include="..\refHost\OngekiFumenEditor\OngekiFumenEditor\OngekiFumenEditor.csproj" />
+    <ProjectReference Include="..\src\OngekiFumenEditorPlugins.OngekiFumenSupport.csproj" />
   </ItemGroup>
 
 </Project>
