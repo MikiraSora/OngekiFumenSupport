@@ -26,12 +26,14 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
             bullet.TGrid.Unit = dataArr[2];
             bullet.TGrid.Grid = (int)dataArr[3];
             bullet.XGrid.Unit = dataArr[4];
-            bullet.BulletDamageTypeValue = args.GetData<string>(5)?.ToUpper() switch
+
+            var type = args.GetData<string>(5)?.ToUpper();
+            bullet.BulletDamageTypeValue = type switch
             {
                 "NML" => BulletDamageType.Normal,
                 "STR" => BulletDamageType.Hard,
                 "DNG" => BulletDamageType.Danger,
-                _ => throw new NotImplementedException(),
+                _ => throw new NotImplementedException($"BulletDamageTypeValue = {type}"),
             };
 
             return bullet;
