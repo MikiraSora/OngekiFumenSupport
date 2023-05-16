@@ -44,7 +44,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                 return (T[])array;
 
             T[] arr = default;
-            var inputs = line.Trim().Split(SplitEmptyCharArray, StringSplitOptions.RemoveEmptyEntries);
+            var inputs = line.Trim().Split(SplitEmptyCharArray);
 
             if (converters.TryGetValue(type, out var argConverter))
             {
