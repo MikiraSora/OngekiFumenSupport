@@ -2,7 +2,9 @@
 using OngekiFumenEditor.Base;
 using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
 using OngekiFumenEditor.Base.OngekiObjects.Lane.Base;
+using OngekiFumenEditor.Modules.FumenCheckerListViewer.Base;
 using OngekiFumenEditor.Parser;
+using OngekiFumenEditorPlugins.OngekiFumenSupport.Rules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +16,12 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
 {
     public static class StandardizeFormat
     {
+        public record ProcessTask(bool IsSuccess)
+        {
+            public string Message { get; set; }
+            public OngekiFumen SerializedFumen { get; set; }
+        }
+
         private static async Task<OngekiFumen> CopyFumenObject(OngekiFumen fumen)
         {
             var tmpFilePath = Path.GetTempFileName() + ".ogkr";
@@ -27,12 +35,15 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
             return newFumen;
         }
 
-        public static async Task<OngekiFumen> Process(OngekiFumen currentFumen)
+        public static async Task<ProcessTask> Process(OngekiFumen currentFumen)
         {
             var fumen = await CopyFumenObject(currentFumen);
 
             //directly removes objects which not belong to ongeki.
             fumen.SvgPrefabs.Clear();
+
+            if (!CheckFumenIsSerializable(fumen, out var msg))
+                return new(false) { Message = msg };
 
             var laneMap = new Dictionary<ConnectableStartObject, List<ConnectableStartObject>>();
 
@@ -80,7 +91,20 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
                 RecalcGrid(grid);
             }
 
-            return fumen;
+            return new(true) { SerializedFumen = fumen };
+        }
+
+        private static bool CheckFumenIsSerializable(OngekiFumen fumen, out string msg)
+        {
+            var checkRules = IoC.GetAll<IFumenCheckRule>().OfType<IOngekiFumenCheckRule>();
+            if (checkRules.Any(x => x.CheckRule(fumen, null).Any(x => x.Severity == RuleSeverity.Error)))
+            {
+                msg = "谱面存在无法忽略的格式或内容错误,无法继续生成。请使用谱面检查工具检查谱面并修改正确。";
+                return false;
+            }
+
+            msg = string.Empty;
+            return true;
         }
 
         private static void RecalcGrid(GridBase grid)

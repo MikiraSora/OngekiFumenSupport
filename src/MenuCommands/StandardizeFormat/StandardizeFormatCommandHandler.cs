@@ -48,12 +48,18 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
 
             var newFilePath = saveFileDialog.FileName;
 
-            var fumen = await StandardizeFormat.Process(editor.Fumen);
-
+            var taskResult = await StandardizeFormat.Process(editor.Fumen);
             editor.UnlockAllUserInteraction();
 
+            if (!taskResult.IsSuccess)
+            {
+                if (!string.IsNullOrWhiteSpace(taskResult.Message))
+                    MessageBox.Show(taskResult.Message, "生成标准音击谱面", MessageBoxButton.OK);
+                return;
+            }
+
             var serializer = IoC.Get<IFumenParserManager>().GetSerializer(newFilePath);
-            await File.WriteAllBytesAsync(newFilePath, await serializer.SerializeAsync(fumen));
+            await File.WriteAllBytesAsync(newFilePath, await serializer.SerializeAsync(taskResult.SerializedFumen));
 
             if (MessageBox.Show("音击谱面标准化输出,处理完成\n是否立即打开输出文件夹", "生成标准音击谱面", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -65,6 +71,5 @@ namespace OngekiFumenEditor.Kernel.MiscMenu.Commands
 
             return;
         }
-
     }
 }

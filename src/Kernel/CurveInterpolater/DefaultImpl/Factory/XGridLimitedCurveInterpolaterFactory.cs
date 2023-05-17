@@ -13,7 +13,6 @@ namespace OngekiFumenEditor.Kernel.CurveInterpolater.DefaultImpl.Factory
     public class XGridLimitedCurveInterpolaterFactory : ICurveInterpolaterFactory
     {
         public static ICurveInterpolaterFactory Default { get; } = new XGridLimitedCurveInterpolaterFactory();
-
         public string Name => "XGrid.Unit限制(音击钦定)";
 
         public ICurveInterpolateEnumerator CreateInterpolaterForAll(ConnectableStartObject start)

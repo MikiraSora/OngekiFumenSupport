@@ -3,6 +3,7 @@ using OngekiFumenEditor.Base.OngekiObjects;
 using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
 using OngekiFumenEditor.Modules.FumenCheckerListViewer.Base.DefaultNavigateBehaviorImpl;
 using OngekiFumenEditor.Modules.FumenVisualEditor.ViewModels;
+using OngekiFumenEditorPlugins.OngekiFumenSupport.Rules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -13,13 +14,13 @@ using System.Threading.Tasks;
 namespace OngekiFumenEditor.Modules.FumenCheckerListViewer.Base.DefaultRulesImpl
 {
     [Export(typeof(IFumenCheckRule))]
-    internal class NotInterpolatedCurveCheckRule : IFumenCheckRule
+    internal class NotInterpolatedCurveCheckRule : IOngekiFumenCheckRule
     {
         public IEnumerable<ICheckResult> CheckRule(OngekiFumen fumen, FumenVisualEditorViewModel fumenHostViewModel)
         {
             IEnumerable<ICheckResult> CheckList(IEnumerable<ConnectableChildObjectBase> objs)
             {
-                const string RuleName = "[Ongeki]NotInterpolatedCurve";
+                const string RuleName = "[Ongeki] NotInterpolatedCurve";
 
                 foreach (var obj in objs.Where(x => x.IsCurvePath))
                 {
