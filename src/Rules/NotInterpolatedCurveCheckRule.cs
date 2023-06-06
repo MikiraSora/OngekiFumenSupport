@@ -26,7 +26,7 @@ namespace OngekiFumenEditor.Modules.FumenCheckerListViewer.Base.DefaultRulesImpl
                 {
                     yield return new CommonCheckResult()
                     {
-                        Severity = RuleSeverity.Error,
+                        Severity = RuleSeverity.Problem,
                         Description = $"轨道物件曲线还没被插值",
                         LocationDescription = $"{obj.XGrid} {obj.TGrid}",
                         NavigateBehavior = new NavigateToTGridBehavior(obj.TGrid),
