@@ -34,7 +34,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.Kernel
             return fumen.Taps
                 .AsEnumerable<ILaneDockable>()
                 .Concat(fumen.Holds.SelectMany(x => new ILaneDockable[] { x, x.HoldEnd }))
-                .OfType<ILaneDockable>()
+                .FilterNull() //可能有些hold没留end物件,过滤一下
                 .Where(x => x.ReferenceLaneStart?.RecordId is int id && curveStarts.Any(y => y.RecordId == id));
         }
     }
