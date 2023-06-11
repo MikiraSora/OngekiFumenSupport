@@ -28,7 +28,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
             {
                 Log.LogWarn($"Tap parse can't find lane/wallLane RecordId = {laneId}");
             }
-            var tap = (refLaneStart?.IsWallLane ?? false) ? new WallTap() : new Tap();
+            var tap = (refLaneStart?.IsWallLane ?? (laneId == -2)) ? new WallTap() : new Tap();
 
             tap.ReferenceLaneStart = refLaneStart;
 
