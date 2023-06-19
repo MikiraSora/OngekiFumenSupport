@@ -25,11 +25,8 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport.CommandParserImpl
             var refLaneType = fumen.Lanes.FirstOrDefault(x => x.RecordId == laneRecId)?.LaneType;
             lbk.Direction = refLaneType == LaneType.WallLeft ? BlockDirection.Left : BlockDirection.Right;
 
-            lbk.TGrid.Unit = dataArr[2];
-            lbk.TGrid.Grid = (int)dataArr[3];
-
-            lbk.EndIndicator.TGrid.Unit = dataArr[6];
-            lbk.EndIndicator.TGrid.Grid = (int)dataArr[7];
+            lbk.TGrid = new TGrid(dataArr[2], (int)dataArr[3]);
+            lbk.EndIndicator.TGrid = new TGrid(dataArr[6], (int)dataArr[7]);
 
             return lbk;
         }
