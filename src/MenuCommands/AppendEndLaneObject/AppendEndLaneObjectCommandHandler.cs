@@ -50,7 +50,7 @@ namespace OngekiFumenEditor.Kernel.MenuCommands.AppendEndLaneObject
             foreach (var startObj in targetStartObjs)
             {
                 var lastObj = startObj.Children.LastOrDefault() ?? startObj as ConnectableObjectBase;
-                var endObj = LambdaActivator.CreateInstance(startObj.EndType) as ConnectableEndObject;
+                var endObj = startObj.CreateEndObject();
 
                 endObj.TGrid = lastObj.TGrid;
                 endObj.XGrid = lastObj.XGrid;
