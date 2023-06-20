@@ -69,7 +69,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             foreach (var svgPrefab in fumen.SvgPrefabs)
             {
                 sb.Append(svgPrefab.IDShortName);
-                sb.Append($"\t{svgPrefab.ColorSimilar.CurrentValue}\t{svgPrefab.Rotation.CurrentValue}\t{svgPrefab.EnableColorfulLaneSimilar}\t{svgPrefab.OffsetX.CurrentValue}\t{svgPrefab.OffsetY.CurrentValue}\t{svgPrefab.ShowOriginColor}\t{svgPrefab.Opacity.CurrentValue}\t{svgPrefab.Scale}\t{svgPrefab.Tolerance.CurrentValue}\t{svgPrefab.TGrid.Unit}\t{svgPrefab.TGrid.Grid}\t{svgPrefab.XGrid.Unit}\t{svgPrefab.XGrid.Grid}\t{svgPrefab.ColorfulLaneBrightness.CurrentValue}");
+                sb.Append($"\t{svgPrefab.ColorSimilar.CurrentValue}\t{svgPrefab.Rotation.CurrentValue}\t{svgPrefab.EnableColorfulLaneSimilar}\t{svgPrefab.OffsetX.CurrentValue}\t{svgPrefab.OffsetY.CurrentValue}\t{svgPrefab.ShowOriginColor}\t{svgPrefab.Opacity.CurrentValue}\t{svgPrefab.Scale}\t{svgPrefab.Tolerance.CurrentValue}\t{svgPrefab.TGrid.Unit}\t{svgPrefab.TGrid.Grid}\t{svgPrefab.XGrid.Unit}\t{svgPrefab.XGrid.Grid}\t{svgPrefab.ColorfulLaneBrightness.CurrentValue}\t{svgPrefab.IsForceColorful}\t{svgPrefab.ColorfulLaneColor.Id}");
                 switch (svgPrefab)
                 {
                     case SvgImageFilePrefab svgImageFilePrefab:
@@ -80,7 +80,7 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
                     case SvgStringPrefab svgStringPrefab:
                         if (string.IsNullOrWhiteSpace(svgStringPrefab.Content) || string.IsNullOrWhiteSpace(svgStringPrefab.TypefaceName))
                             throw new Exception($"at {svgPrefab.TGrid}, SvgStringPrefab.Content/TypefaceName is empty or null");
-                        sb.Append($"\t{Base64.Encode(svgStringPrefab.Content)}\t{svgStringPrefab.FontSize}\t{svgStringPrefab.FontColor.Id}\t{Base64.Encode(svgStringPrefab.TypefaceName)}\t{svgStringPrefab.ContentFlowDirection}\t{svgStringPrefab.ContentLineHeight}");
+                        sb.Append($"\t{Base64.Encode(svgStringPrefab.Content)}\t{svgStringPrefab.FontSize}\t{Base64.Encode(svgStringPrefab.TypefaceName)}\t{svgStringPrefab.ContentFlowDirection}\t{svgStringPrefab.ContentLineHeight}");
                         break;
                     default:
                         break;
