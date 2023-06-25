@@ -58,7 +58,6 @@ namespace OngekiFumenEditor.Kernel.MenuCommands.AppendEndLaneObject
                 startObj.AddChildObject(endObj);
             }
 
-            editor.Redraw(RedrawTarget.OngekiObjects);
             editor.Toast.ShowMessage($"已补上 {targetStartObjs.Length} 个轨道物件");
 
             return Task.CompletedTask;
