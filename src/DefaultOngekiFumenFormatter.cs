@@ -58,10 +58,22 @@ namespace OngekiFumenEditorPlugins.OngekiFumenSupport
             ProcessCURVE(fumen, sb);
             sb.AppendLine();
 
+            ProcessComment(fumen, sb);
+            sb.AppendLine();
+
             ProcessSVG(fumen, sb);
             sb.AppendLine();
 
             return Task.FromResult(Encoding.UTF8.GetBytes(sb.ToString()));
+        }
+
+        private void ProcessComment(OngekiFumen fumen, StringBuilder sb)
+        {
+            sb.AppendLine("[COMMENT]");
+
+            foreach (var o in fumen.Comments.OrderBy(x => x.TGrid))
+                sb.AppendLine($"{o.IDShortName}\t{o.TGrid.Serialize()}\t{Base64.Encode(o.Content)}");
+            sb.AppendLine();
         }
 
         private void ProcessSVG(OngekiFumen fumen, StringBuilder sb)
